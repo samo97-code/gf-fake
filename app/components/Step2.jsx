@@ -28,7 +28,7 @@ const Step2 = ({step, setStep, isTransitioning}) => {
                                     <img src={ethnicity.src} alt={ethnicity.title}
                                          className="rounded-2xl min-h-max sm:min-h-[85px] md:min-h-[97px] h-full w-full object-cover"/>
                                     <p
-                                        className={`${active && active === ethnicity.id ? 'bg-blurTitle' : ''} right-1 top-2 md:top-6 px-5 py-2.5 absolute text-white bg-zinc-900 bg-opacity-50 rounded-full backdrop-blur-sm`}>
+                                        className={`${active && active === ethnicity.id ? 'bg-blurTitle' : 'bg-zinc-900'} right-1 top-2 md:top-6 px-5 py-2.5 absolute text-white bg-opacity-50 rounded-full backdrop-blur-sm`}>
                                         {ethnicity.title}
                                     </p>
                                 </div>
