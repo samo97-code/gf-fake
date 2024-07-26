@@ -11,7 +11,7 @@ export default async function handler(req, res) {
             method,
             headers: {
                 ...req.headers,
-                'Host': process.env.BaseApiUrl,
+                'Host': 'staging-kup-test-12304421-75948bd29ae6.herokuapp.com',
             },
             data: req.body,
             httpsAgent: new https.Agent({

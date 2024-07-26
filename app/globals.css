@@ -83,7 +83,6 @@ input[type=range]::-webkit-slider-thumb {
 
 
 .container {
-  position: relative;
   height: 100vh;
 }
 
@@ -188,6 +187,35 @@ input[type=range]::-webkit-slider-thumb {
   }
   50% {
     transform: translateY(-1000px);
+  }
+}
+
+.desktop-relative, .both-relative{
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .section{
+    justify-content: flex-start;
+  }
+  .desktop-relative{
+    position: static;
+  }
+  @keyframes moveDown {
+    0%, 100% {
+      transform: translateY(-200px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes moveUp {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-200px);
+    }
   }
 }
 

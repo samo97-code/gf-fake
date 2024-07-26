@@ -33,18 +33,16 @@ const StepLogin = ({step}) => {
         if (!isEmailValid && !isPasswordValid) return
 
         try {
-            const response = await fetch('/api/proxy?endpoint=/api/auth/providers/local', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+            await axios.post('/api/proxy', {
                     email: form.email,
                     password: form.password,
-                }),
-            });
-            // console.log(resp, 'resp')
-            // handleLoginSuccess()
+                },
+                {
+                    params: {
+                        endpoint: '/api/auth/providers/local',
+                    }
+                })
+            handleLoginSuccess()
         } catch (e) {
             console.log(e)
         }

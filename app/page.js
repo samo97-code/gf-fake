@@ -42,7 +42,7 @@ export default function Home() {
                                  className="w-full h-full md:h-auto max-h-screen object-cover"/>
                         </div>
                         <div
-                            className="md:flex-1 w-full justify-center items-center mx-auto my-auto bg-[#19181c] overflow-hidden container max-h-screen">
+                            className={`${ [0,1].includes(step) ? "desktop-relative" : [2,3,4,6].includes(step) ? 'both-relative' : ''} md:flex-1 w-full justify-center items-center mx-auto my-auto bg-[#19181c] overflow-hidden container max-h-screen`}>
                             <Intro isTransitioning={isTransitioning} step={step} setStep={setStep}/>
                             <Step1 isTransitioning={isTransitioning} step={step} setStep={setStep}/>
                             <Step2 isTransitioning={isTransitioning} step={step} setStep={setStep}/>
