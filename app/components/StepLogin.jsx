@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {validateEmail, validatePassword} from "@/app/utils/func";
-import axios from "@/app/utils/axios";
+import axios from "axios"
 
 const StepLogin = ({step}) => {
     const [passwordType, setPasswordType] = React.useState('password');
@@ -18,8 +18,8 @@ const StepLogin = ({step}) => {
         }));
     }
 
-    const loginSocial = async ()=>{
-        window.open(`${process.env.BaseApiUrl}/api/auth/providers/google`,'_self')
+    const loginSocial = async () => {
+        window.open(`${process.env.BaseApiUrl}/api/auth/providers/google`, '_self')
     }
 
     const handleSubmit = async (e) => {
@@ -33,14 +33,20 @@ const StepLogin = ({step}) => {
         if (!isEmailValid && !isPasswordValid) return
 
         try {
-            const resp = await axios.post('/api/auth/providers/local', {
-                email: form.email,
-                password: form.password,
-            })
-            console.log(resp,'resp')
+            const response = await fetch('/api/proxy?endpoint=/api/auth/providers/local', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: form.email,
+                    password: form.password,
+                }),
+            });
+            // console.log(resp, 'resp')
             // handleLoginSuccess()
         } catch (e) {
-            console.error(e)
+            console.log(e)
         }
     }
 

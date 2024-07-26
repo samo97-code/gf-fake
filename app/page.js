@@ -9,7 +9,7 @@ import StepLoading from "@/app/components/StepLoading";
 import StepLogin from "@/app/components/StepLogin";
 
 export default function Home() {
-    const [step, setStep] = useState(6);
+    const [step, setStep] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     const scrollToSection = () => {
