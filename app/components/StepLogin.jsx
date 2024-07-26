@@ -36,9 +36,8 @@ const StepLogin = ({step}) => {
         // }
     }
 
-    const handleLoginSuccess = (user) => {
-        console.log('1111')
-        // setUser(user);
+    const handleLoginSuccess = () => {
+        window.open('https://www.kupid.ai/ru',"_self")
     };
 
     return (
