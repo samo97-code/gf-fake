@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {validateEmail, validatePassword} from "@/app/utils/func";
+import GoogleAuthProviderWrapper from "@/app/components/auth/GoogleAuthProvider";
+import GoogleLoginButton from "@/app/components/auth/GoogleLoginButton";
 
 const StepLogin = ({step}) => {
     const [passwordType,setPasswordType] = React.useState('password');
@@ -17,19 +19,27 @@ const StepLogin = ({step}) => {
         }));
     }
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault()
-
         const isEmailValid = !!validateEmail(form.email)
         setIsValidEmail(isEmailValid)
 
         const isPasswordValid = validatePassword(form.password)
         setIsValidPassword(isPasswordValid)
 
-        if (isEmailValid && isPasswordValid){
-            console.log('SUBMIT')
-        }
+        if (!isEmailValid && !isPasswordValid) return
+
+        // try {
+        //    const resp = await
+        // }catch (e) {
+        //     console.error(e)
+        // }
     }
+
+    const handleLoginSuccess = (user) => {
+        console.log('1111')
+        // setUser(user);
+    };
 
     return (
         <div
@@ -58,11 +68,9 @@ const StepLogin = ({step}) => {
                                     <h2 className="text-2xl text-white leading-7 lg:leading-8 font-bold mb-4 lg:mb-6 text-center">Sign
                                         up to see it</h2>
 
-                                    <button
-                                        className="inline-flex items-center justify-center w-full rounded-[10px] px-4 py-2.5 mb-2.5 bg-white">
-                                        <img src="/google-auth.png" alt="google" className="h-6 w-6 mr-3"/>
-                                        <span className="text-[#344054]">Google</span>
-                                    </button>
+                                    <GoogleAuthProviderWrapper>
+                                        <GoogleLoginButton onLoginSuccess={handleLoginSuccess} />
+                                    </GoogleAuthProviderWrapper>
 
                                     <div className="flex flex-row items-center justify-between pb-5">
                                         <div className="flex-1 h-[1px]"
