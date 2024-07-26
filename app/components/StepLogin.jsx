@@ -1,25 +1,28 @@
 import React, {useState} from 'react';
 import {validateEmail, validatePassword} from "@/app/utils/func";
-import GoogleAuthProviderWrapper from "@/app/components/auth/GoogleAuthProvider";
-import GoogleLoginButton from "@/app/components/auth/GoogleLoginButton";
+import axios from "@/app/utils/axios";
 
 const StepLogin = ({step}) => {
-    const [passwordType,setPasswordType] = React.useState('password');
-    const [isValidEmail,setIsValidEmail] = React.useState(true);
-    const [isValidPassword,setIsValidPassword] = React.useState(true);
-    const [form,setForm] = useState({
+    const [passwordType, setPasswordType] = React.useState('password');
+    const [isValidEmail, setIsValidEmail] = React.useState(true);
+    const [isValidPassword, setIsValidPassword] = React.useState(true);
+    const [form, setForm] = useState({
         email: '',
         password: ''
     })
 
-    const changeHandler = (e)=>{
+    const changeHandler = (e) => {
         setForm(prevState => ({
             ...prevState,
             [e.target.name]: e.target.value,
         }));
     }
 
-    const handleSubmit = async(e)=>{
+    const loginSocial = async ()=>{
+        window.open(`${process.env.BaseApiUrl}/api/auth/providers/google`,'_self')
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const isEmailValid = !!validateEmail(form.email)
         setIsValidEmail(isEmailValid)
@@ -29,15 +32,20 @@ const StepLogin = ({step}) => {
 
         if (!isEmailValid && !isPasswordValid) return
 
-        // try {
-        //    const resp = await
-        // }catch (e) {
-        //     console.error(e)
-        // }
+        try {
+            const resp = await axios.post('/api/auth/providers/local', {
+                email: form.email,
+                password: form.password,
+            })
+            console.log(resp,'resp')
+            // handleLoginSuccess()
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     const handleLoginSuccess = () => {
-        window.open('https://www.kupid.ai/ru',"_self")
+        window.open('https://www.kupid.ai/ru', "_self")
     };
 
     return (
@@ -67,9 +75,12 @@ const StepLogin = ({step}) => {
                                     <h2 className="text-2xl text-white leading-7 lg:leading-8 font-bold mb-4 lg:mb-6 text-center">Sign
                                         up to see it</h2>
 
-                                    <GoogleAuthProviderWrapper>
-                                        <GoogleLoginButton onLoginSuccess={handleLoginSuccess} />
-                                    </GoogleAuthProviderWrapper>
+                                    <button onClick={() => loginSocial()}
+                                            type="button"
+                                            className="inline-flex items-center justify-center w-full rounded-[10px] px-4 py-2.5 mb-2.5 bg-white">
+                                        <img src="/google-auth.png" alt="google" className="h-6 w-6 mr-3"/>
+                                        <span className="text-[#344054]">Google</span>
+                                    </button>
 
                                     <div className="flex flex-row items-center justify-between pb-5">
                                         <div className="flex-1 h-[1px]"
@@ -80,7 +91,7 @@ const StepLogin = ({step}) => {
                                     </div>
 
                                     <div className="form-container">
-                                        <form onSubmit={(e)=>handleSubmit(e)}>
+                                        <form onSubmit={(e) => handleSubmit(e)}>
                                             <div
                                                 className="form-group w-full flex-col justify-start items-start gap-1.5 inline-flex mb-6">
                                                 <div
@@ -93,7 +104,7 @@ const StepLogin = ({step}) => {
                                                                placeholder="E-mail"
                                                                value={form.email}
                                                                name="email"
-                                                               onChange={(e)=>changeHandler(e)}
+                                                               onChange={(e) => changeHandler(e)}
                                                                className="string email required w-full pl-10 pr-6 py-3 rounded-[10px] border border-secondaryGrey bg-[#24232B] text-sm font-medium text-white placeholder-[#676767] focus:outline-none active:outline-none focus:border-[#1c64f2] active:border-[#1c64f2]"/>
                                                         {!isValidEmail &&
                                                             <span className="text-grey flex text-[13px] mt-1">Your email or password is invalid.</span>}
@@ -118,7 +129,7 @@ const StepLogin = ({step}) => {
                                                                placeholder="Password"
                                                                value={form.password}
                                                                name="password"
-                                                               onChange={(e)=>changeHandler(e)}
+                                                               onChange={(e) => changeHandler(e)}
                                                                className="string required w-full pl-10 pr-9 py-3 rounded-[10px] border border-secondaryGrey bg-[#24232B] text-sm font-medium text-white placeholder-[#676767] focus:outline-none active:outline-none focus:border-[#1c64f2] active:border-[#1c64f2]"/>
                                                         {
                                                             !isValidPassword &&
