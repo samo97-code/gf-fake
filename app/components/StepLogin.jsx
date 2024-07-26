@@ -42,7 +42,7 @@ const StepLogin = ({step}) => {
                             <div className="flex-1 mx-6 lg:mx-10 mt-6 lg:mt-10">
                                 <div className="relative text-center">
                                     <div
-                                        className="mt-[0.5rem] mb-[1rem] rounded-full flex items-center gap-3 py-1 px-2.5 bg-[#393742]">
+                                        className="mt-[0.5rem] mb-[1rem] rounded-full flex items-center gap-3 py-1 px-2.5 bg-secondaryGrey">
                                         <div className="relative flex justify-center items-center">
                                             <div className="loader"></div>
                                             <img src="/blurry_loader.png" alt="loader-image"
@@ -87,7 +87,7 @@ const StepLogin = ({step}) => {
                                                                value={form.email}
                                                                name="email"
                                                                onChange={(e)=>changeHandler(e)}
-                                                               className="string email required w-full pl-10 pr-6 py-3 rounded-[10px] border border-[#393742] bg-[#24232B] text-sm font-medium text-white placeholder-[#676767] focus:outline-none active:outline-none focus:border-[#1c64f2] active:border-[#1c64f2]"/>
+                                                               className="string email required w-full pl-10 pr-6 py-3 rounded-[10px] border border-secondaryGrey bg-[#24232B] text-sm font-medium text-white placeholder-[#676767] focus:outline-none active:outline-none focus:border-[#1c64f2] active:border-[#1c64f2]"/>
                                                         {!isValidEmail &&
                                                             <span className="text-grey flex text-[13px] mt-1">Your email or password is invalid.</span>}
                                                     </div>
@@ -112,7 +112,7 @@ const StepLogin = ({step}) => {
                                                                value={form.password}
                                                                name="password"
                                                                onChange={(e)=>changeHandler(e)}
-                                                               className="string required w-full pl-10 pr-9 py-3 rounded-[10px] border border-[#393742] bg-[#24232B] text-sm font-medium text-white placeholder-[#676767] focus:outline-none active:outline-none focus:border-[#1c64f2] active:border-[#1c64f2]"/>
+                                                               className="string required w-full pl-10 pr-9 py-3 rounded-[10px] border border-secondaryGrey bg-[#24232B] text-sm font-medium text-white placeholder-[#676767] focus:outline-none active:outline-none focus:border-[#1c64f2] active:border-[#1c64f2]"/>
                                                         {
                                                             !isValidPassword &&
                                                             <span className="text-grey flex text-[13px] mt-1">Your password is too short (min 6 chars) or too weak</span>
